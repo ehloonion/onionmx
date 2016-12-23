@@ -68,7 +68,7 @@ Are there problems? [Why yes there are!](problems.md)
 
 # A better way?
 
-Scaling is painful, there are some ideas for improving this, such as a [SRV record](problems.md), or using the web-of-trust.
+Scaling is painful, there are some ideas for improving this, such as a [SRV record](SRV.md), or using the web-of-trust.
 
 Maybe you have a better way?
 
