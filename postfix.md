@@ -31,6 +31,10 @@ You may already have transport maps, just add this one, separated by commas.
 
 Then, create the transport map file by taking [the file you can find in this repository](tor_transport) and putting it in /etc/postfix/tor_transport (or the directory where you configured it above).
 
+Then hash the map:
+
+    postmap hash:/etc/postfix/tor_transport
+
 ## Get SOCKS5 native support in postfix!
 
 What would be nice is if someone went to postfix and asked them to add native SOCKS5 support. Ideally, postfix would handle a .onion address to go through a SOCKS proxy by default.
