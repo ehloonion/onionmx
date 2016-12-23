@@ -29,7 +29,7 @@ In your /etc/postfix/main.cf, add a transport map:
 
 You may already have transport maps, just add this one, separated by commas.
 
-Create the transport map with [the file you can find in this repository](tor_transport).
+Then, create the transport map file by taking [the file you can find in this repository](tor_transport) and putting it in /etc/postfix/tor_transport (or the directory where you configured it above).
 
 ## Get SOCKS5 native support in postfix!
 
