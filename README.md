@@ -1,6 +1,6 @@
 # Introduction
 
-Onion mail delivery: so delicious!
+Onion mail delivery: *so* delicious!
 
 ## Why deliver mail over tor?
 
@@ -41,6 +41,7 @@ Ok.
 We want to do this first, because if you don't get this setup right, you may become an open relay, that is bad.
 
 [Postfix](postfix.md) instructions
+
 [Exim](https://tech.immerda.ch/2016/12/ehlo-onion/)
 
 ## Make sure you aren't an open relay
@@ -74,5 +75,6 @@ Maybe you have a better way?
 # References
 
 [This adventure started here](https://www.void.gr/kargig/blog/2014/05/10/smtp-over-hidden-services-with-postfix/)
+
 [Single Onion Services](https://blog.torproject.org/blog/whats-new-tor-0298)
 
