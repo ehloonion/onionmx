@@ -76,5 +76,4 @@ Maybe you have a better way?
 
 [This adventure started here](https://www.void.gr/kargig/blog/2014/05/10/smtp-over-hidden-services-with-postfix/)
 
-[Single Onion Services](https://blog.torproject.org/blog/whats-new-tor-0298)
 
