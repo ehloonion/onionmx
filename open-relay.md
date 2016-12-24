@@ -1,10 +1,10 @@
 # Open relay
 
-When you setup a tor hidden service to accept connections to your SMTP server, you need to be careful that you aren't opening your mail server up to be an open relay on the tor network (double plus bad).  You need to very carefully inspect your configuration to see if you are allowing 127.0.0.1 connections to relay mail, and if you are.
+When you setup a Tor hidden service to accept connections to your SMTP server, you need to be careful that you aren't opening your mail server up to be an open relay on the Tor network (double plus bad).  You need to very carefully inspect your configuration to see if you are allowing 127.0.0.1 connections to relay mail, and if you are.
 
 Here are a couple ways to stop it in Postfix:
 
-By default, in postfix, you are allowing `127.0.0.1/8` in `mynetworks` and `smtpd_recipient_restrictions` set to `permit_mynetworks`. The tor hidden service will connect via 127.0.0.1, so if you allow that to send without authentication, you are an open mail relay on the tor network: fun times.
+By default, in postfix, you are allowing `127.0.0.1/8` in `mynetworks` and `smtpd_recipient_restrictions` set to `permit_mynetworks`. The Tor hidden service will connect via 127.0.0.1, so if you allow that to send without authentication, you are an open mail relay on the Tor network: fun times.
 
 There are a few ways of dealing with this. 
 

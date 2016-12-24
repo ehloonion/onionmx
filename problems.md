@@ -12,11 +12,11 @@ If the goal is to solely improve transport, then this does improve things. Excha
 
 When you send mail over the clearnet, you do a DNS resolution, then you connect and then you do SSL "validation". Where "validation" is some kind of TLS cert that is bound to the domain in the MX and is connected to an agreed on root chain (*cough*certificate mafia*cough*). If I'm an attacker, currently I need to do _two_ things, DNS hijack and have a valid SSL cert for that domain.
 
-With the TorMX situation you DNS resolve your onion SRV, and then that is it, an attacker just needs to DNS hijack the MX resolution and send a different .onion address for delivery, and job done.
+With OnionMX you DNS resolve your onion SRV, and then that is it, an attacker just needs to DNS hijack the MX resolution and send a different .onion address for delivery, and job done.
 
-In the first case you have to do two things, but in the torMX SRV record lookup, you have to do only DNS hijacking.
+In the first case you have to do two things, but in the OnionMX SRV record lookup, you have to do only DNS hijacking.
 
-In the clearnet situation, you can also do DNS hijack the MX resolution, but if you are an attacker that is able to tamper with clearnet connection betweek 2 MTAs, but not with the senders DNS forward lookups, you won't succeed with the TorMX approach. So the attack still works when you somehow are able to control results for the sender's lookups.
+In the clearnet situation, you can also do DNS hijack the MX resolution, but if you are an attacker that is able to tamper with clearnet connection betweek 2 MTAs, but not with the senders DNS forward lookups, you won't succeed with the OnionMX approach. So the attack still works when you somehow are able to control results for the sender's lookups.
 
 With email, TLS is basically broken: nobody actually verifies fingerprints. If you do, you break most delivery on the internet, you have to allow NO ssl at all, or untrusted certs, or unverified certs, or broken chain certs, etc. As the postfix documentation says:
 
@@ -27,7 +27,7 @@ With email, TLS is basically broken: nobody actually verifies fingerprints. If y
           Postfix SMTP server. This option is off by default and should
           only seldom be used.
 
-So we are back to the same problem. The only way to be sure via TLS is that we pin TLS FPs (after some validation) and how do you maintain a growing list of cert fingerprints and distribute them among n number of participants? So, if the goal is to solely improve transport, then yes it does improve that, but you cannot rely on authentication or endpoint validation (as a tor client I have a GUARANTEE that the endpoint is the service I want)... the question is if this is worse.
+So we are back to the same problem. The only way to be sure via TLS is that we pin TLS FPs (after some validation) and how do you maintain a growing list of cert fingerprints and distribute them among n number of participants? So, if the goal is to solely improve transport, then yes it does improve that, but you cannot rely on authentication or endpoint validation (as a Tor client I have a GUARANTEE that the endpoint is the service I want)... the question is if this is worse.
 
 I'm not sure you get anything additional with clearnet+TLS. You *do* get cert validation, if you have one and the remote is configured to validate, but if you don't have one, it just will be fine with that. Also if the DNS is hijacked, the client wont care if the cert suddenly disappeared. The internet is designed not to do that...  on clearnet: i can make a TLS cert and set my MTA to use that, and then someone hijacks my DNS and redirects my mail somewhere else, and the remote MTAs will just happily continue delivering (unless they have pinned the FP of the cert and set the value to say it MUST be TLS and MUST be this cert).
 
