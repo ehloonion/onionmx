@@ -12,7 +12,11 @@ The reason why smtp_dns_support_level is set to disabled is because of torsocks 
 
 ## Create the smtp_tor transport
 
-In /usr/lib/postfix/smtp_tor, place the following:
+Find out where your postfix daemon directory is:
+
+    # postconf daemon_directory
+
+Place the following into your `daemon_directory`, changing `/usr/lib/postfix` to be the `daemon_directory` you found above (with `smtp` at the end):
 
      #!/bin/sh
 
@@ -20,9 +24,9 @@ In /usr/lib/postfix/smtp_tor, place the following:
 
 Make it executable. 
 
-Explanation: The '-i' flag to torsocks makes it use a different circuit for each attempt, hopefully recovering faster from tor network errors.
+Explanation: The '-i' flag to torsocks makes it use a different circuit for each attempt, hopefully recovering faster from Tor network errors.
 
-## Setup a tor transport map
+## Setup a Tor transport map
 
 In your /etc/postfix/main.cf, add a transport map:
     transport_maps = hash:/etc/postfix/tor_transport
