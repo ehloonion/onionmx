@@ -2,7 +2,7 @@
 
 It could be like the following:
 
-    _onionmx.tcp.example.com. 3600 IN SRV 0 5 25 fofofmumububu.onion.
+    _onion-mx.tcp.example.com. 3600 IN SRV 0 5 25 fofofmumububu.onion.
 
 
 One way is with the [python script](scripts/postdns.py) which replies to tcp_table lookup [1] queries by postfix. It queries the destination domain for a specific SRV record, '_onion-mx._tcp.' and if it finds a '.onion' address in the reply it gives it back to postfix to be used by the 'smtptor' service defined in master.cf. If no valid SRV record is found the mail is passed to 'smtp' service.
