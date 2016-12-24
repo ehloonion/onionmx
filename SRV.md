@@ -35,8 +35,10 @@ The script thinks you have a local resolver at 127.0.0.1:53 answering TCP querie
 ## Configure postfix
 
 In main.cf:
-   transport_maps = tcp:127.0.0.1:23000
+
+    transport_maps = tcp:127.0.0.1:23000
 
 In master.cf:
-   127.0.0.1:23000 inet n n n - 0 spawn user=nobody argv=/usr/local/bin/postdns.py
+
+    127.0.0.1:23000 inet n n n - 0 spawn user=nobody argv=/usr/local/bin/postdns.py
 
