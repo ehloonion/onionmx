@@ -29,6 +29,7 @@ Explanation: The '-i' flag to torsocks makes it use a different circuit for each
 ## Setup a Tor transport map
 
 In your /etc/postfix/main.cf, add a transport map:
+
     transport_maps = hash:/etc/postfix/tor_transport
 
 You may already have transport maps, just add this one, separated by commas.
