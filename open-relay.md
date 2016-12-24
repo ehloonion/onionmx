@@ -12,6 +12,7 @@ We looked at our setup and determined that any local process that needs to send 
 
 So we removed 127.0.0.1 from mynetworks, and then used the newer postfix variable that was designed for restricting relays:
 
+~~~
 smtpd_relay_restrictions = permit_sasl_authenticated,
         reject_unauth_destination
 
@@ -21,11 +22,13 @@ smtpd_recipient_restrictions =
         permit_sasl_authenticated,
         permit_mynetworks,
         permit
+~~~
 
 *Do not* just copy and paste the above, you should carefully review your restrictions to make sure they are right for you.
 
 Another way is to send all mail through a secondary transport that has a different set of restrictions:
 
+~~~
 /etc/postfix/master.cf
 2525      inet  n       -       -       -       -       smtpd
 
@@ -35,7 +38,7 @@ Another way is to send all mail through a secondary transport that has a differe
         -o smtpd_sasl_auth_enable=yes
         -o smtpd_client_restrictions=permit_sasl_authenticated,reject
         -o smtpd_sender_restrictions=
-
+~~~
 
 Another way to solve this is by:
 
@@ -51,9 +54,11 @@ Another way is to let postfix listen to a different port than 25 for submission 
 
 1. Configure 2525 in postfix/master.cf
 
+~~~
     2525      inet  n       -       -       -       -       smtpd
         -o smtpd_recipient_restrictions=permit_sasl_authenticated,reject_unauth_destination,reject_non_fqdn_recipient,reject_unknown_recipient_domain,$custom_value2,$custom_value3,permit
         -o smtpd_sender_restrictions=permit_sasl_authenticated,reject_non_fqdn_sender,reject_unknown_sender_domain,reject_unauth_pipelining,reject_sender_login_mismatch,reject_unlisted_sender,$custom_value1,permit
+~~~
 
 *NOTE:* sender restrictions matter here! *Beware*: there can't be whitespace in the argument passed to -o, so if you need spaces in there, better define a variable in main.cf (eg. $tor_smtpd_relay_restrictions) and use it in master.cf. 
 
