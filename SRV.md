@@ -2,7 +2,7 @@
 
 Make a DNS record like the following (replacing your domain and .onion):
 
-    _onion-mx.tcp.example.com. 3600 IN SRV 0 5 25 fofofmumububu.onion.
+    _onion-mx._tcp.example.com. 3600 IN SRV 0 5 25 fofofmumububu.onion.
 
 Test that it is working by doing a DNS query of your domain, it should return the record:
 
