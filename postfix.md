@@ -32,7 +32,11 @@ Discussion:
 
 * The `-i` flag to torsocks makes it use a different circuit for each attempt, hopefully recovering faster from Tor network errors. Unfortunately, using the `-i` flag makes torsocks *not* re-use the HS circuit, so performance will go down at the cost of delivery recovery.
 
-## Setup a Tor transport map
+## Setup a DNS SRV record and a tcp map
+
+Now follow [these instructions](SRV.md) to get a DNS record published, and a tcp table lookup script setup and installed.
+
+## Optional: Setup a static Tor transport map
 
 In your /etc/postfix/main.cf, add a transport map:
 
@@ -46,10 +50,4 @@ Then hash the map:
 
     postmap hash:/etc/postfix/tor_transport
 
-## Get SOCKS5 native support in postfix!
-
-What would be nice is if someone went to postfix and asked them to add native SOCKS5 support. Ideally, postfix would handle a .onion address to go through a SOCKS proxy by default.
-
-Depending on torsocks is not an elegant solution, and if we are going to scale this it probably is better to do it more "native" than some duct-taped script.
-
-Can you help us get SOCKS5 support in postfix?
+Remember, any time you update this map, you need to run the `postmap` command again.

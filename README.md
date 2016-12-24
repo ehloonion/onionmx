@@ -56,21 +56,37 @@ Spend some time [making sure you aren't an open relay](open-relay.md).
 
 Now get [Tor going](tor.md)
 
-# Make a pull request
-
-Now that you have configured your MTA, you've confirmed you aren't an open relay, and you've setup a Tor onion service, why don't you submit a pull request for the [Tor transport map](tor_transport) to add your domain. Giving some assurance that you control it would be good, or if it isn't yours, provide some details about how you determined this was a valid onion. 
-
-This is a bit of a TOFU approach, and yes someone could mess with this. Its not perfect.
-
 # Problems
 
 Are there problems? [Why yes there are!](problems.md)
 
 # A better way?
 
-Scaling is painful, there are some ideas for improving this, such as a [SRV record](SRV.md), or using the web-of-trust.
+[Maybe you have a better way?](https://github.com/riseupnet/onionmx/issues/new)
 
-Maybe you have a better way?
+# Help this effort
+
+## Advocate
+
+Get your favorite email provider to do this, tweet at them, file a support request, get them off the clearnet!
+
+## Get SOCKS5 native support in postfix!
+
+What would be nice is if someone went to postfix and asked them to add native SOCKS5 support. Ideally, postfix would handle a .onion address to go through a SOCKS proxy by default.
+
+Depending on torsocks is not an elegant solution, and if we are going to scale this it probably is better to do it more "native" than some duct-taped script.
+
+Can you help us get SOCKS5 support in postfix?
+
+# FAQ
+
+## How do I get on this static tor transport map?
+
+If you got things setup, you aren't an open relay, then you ou should [publish a SRV record in DNS](SRV.md) and people can use that. Otherwise scaling is hard. 
+
+However, if you can't do that, and you can prove the onion you have is valid, then make pull request for the [Tor transport map](tor_transport) to add your domain. 
+
+The ones in this file we have verified, you can trust us on that, or not.
 
 # References
 
