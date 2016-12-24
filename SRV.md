@@ -19,6 +19,7 @@ a [go implementation](https://git.autistici.org/ale/postfix-onion-transport), wh
 Download the [script](https://raw.githubusercontent.com/riseupnet/onionmx/master/scripts/postdns.py) and put it in /usr/local/bin and make it executable.
 
 Install the needed dependency:
+
     # apt install python-dnspython
     
 # Configure the script
