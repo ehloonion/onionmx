@@ -28,7 +28,9 @@ Place the following into your `daemon_directory`, changing `/usr/lib/postfix` to
 
 Make it executable. 
 
-Explanation: The '-i' flag to torsocks makes it use a different circuit for each attempt, hopefully recovering faster from Tor network errors.
+Discussion:
+
+* The `-i` flag to torsocks makes it use a different circuit for each attempt, hopefully recovering faster from Tor network errors. Unfortunately, using the `-i` flag makes torsocks *not* re-use the HS circuit, so performance will go down at the cost of delivery recovery.
 
 ## Setup a Tor transport map
 
