@@ -30,7 +30,7 @@ Yes. We've been doing this for over a year, and it works dandy. We would like to
 
 When things are working, it looks like this:
 
-    Nov 23 09:05:39 mx1 postfix/smtp[27831]: AA7C9411DC: to=<emailaddress@inthetortransport.map>, relay=wy6zk3pmcwiyhiao.onion.onion[127.0.0.1]:25, delay=1414, delays=1160/249/3.2/1.5, dsn=2.0.0, status=sent (250 2.0.0 Ok: queued as E8798A0DE7)
+    Nov 23 09:05:39 mx1 postfix/smtp[27831]: AA7C9411DC: to=<emailaddress@inthetortransport.map>, relay=wy6zk3pmcwiyhiao.onion[127.0.0.1]:25, delay=1414, delays=1160/249/3.2/1.5, dsn=2.0.0, status=sent (250 2.0.0 Ok: queued as E8798A0DE7)
 
 # Lets do this.
 
