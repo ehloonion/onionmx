@@ -3,10 +3,11 @@
 import re
 import sys
 import dns.resolver
+from scripts import libs
 
 myresolver = dns.resolver.Resolver()
 
-name = raw_input("")
+name = libs.cross_input("")
 if name == 'get *':
     print("200 :")
     sys.exit(0)
@@ -31,8 +32,8 @@ if not re.search(myself, record):
         answers = myresolver.query(record, 'SRV', tcp=True)
         for rdata in answers:
             if re.search(r'onion\.$', str(rdata.target)):
-                print "200 %s:[%s]" % (onion_transport,
-                                       str(rdata.target).rstrip('.'))
+                print("200 %s:[%s]" % (onion_transport,
+                                       str(rdata.target).rstrip('.')))
             else:
                 print("200 smtp:")
     except:
