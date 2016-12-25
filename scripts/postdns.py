@@ -32,8 +32,9 @@ if not re.search(myself, record):
         answers = myresolver.query(record, 'SRV', tcp=True)
         for rdata in answers:
             if re.search(r'onion\.$', str(rdata.target)):
-                print("200 %s:[%s]" % (onion_transport,
-                                       str(rdata.target).rstrip('.')))
+                print("200 {onion_tp}:[{data}]"
+                      .format(onion_tp=onion_transport,
+                              data=str(rdata.target).rstrip('.')))
             else:
                 print("200 smtp:")
     except:
