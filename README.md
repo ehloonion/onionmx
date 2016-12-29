@@ -60,11 +60,13 @@ Now get [Tor going](tor.md)
 
 Are there problems? [Why yes there are!](problems.md)
 
-# A better way?
-
-[Maybe you have a better way?](https://github.com/riseupnet/onionmx/issues/new)
-
 # Help this effort
+
+## Participate
+
+There is a [mailing list](https://lists.immerda.ch/mailman/listinfo/onionmx) to discuss the development of this proposal.
+
+Maybe you have a better way? Create issues or pull requests!
 
 ## Advocate
 
