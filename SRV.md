@@ -21,7 +21,7 @@ Download the [script](https://raw.githubusercontent.com/riseupnet/onionmx/master
 Install the needed dependency:
 
     # apt install python-dnspython
-    
+
 # Configure the script
 
 Edit the script and change 'myself' variable with your local domain.
@@ -31,19 +31,19 @@ The script thinks you have a local resolver at 127.0.0.1:53 answering TCP querie
 Discussion:
 
 The script queries the destination domain for a specific SRV record, '_onion-mx._tcp.' and if it finds a '.onion' address in the reply it gives it back to postfix to be used by the 'smtptor' service defined in master.cf. If no valid SRV record is found the mail is passed to 'smtp' service. This gives us dynamic SRV lookups that lead to SMTP over onion addresses!
-    
+
 # Configure postfix
 
 In main.cf:
 
     transport_maps = tcp:127.0.0.1:23000
-    
+
 Discussion:
 
 If you want to "pin" some onion transports with a [static map](tor_transport), because you've confirmed addresses out-of-band and don't want to leak metadata through DNS requests, you can do that by setting that file before the tcp map, like this:
 
     transport_maps = hash:/etc/postfix/tor_transport, tcp:127.0.0.1:23000
-    
+
 This will lookup the entries in the static map and resolve them, but if they aren't there, it will try a DNS SRV lookup.
 
 Now set the following in master.cf:
