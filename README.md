@@ -82,6 +82,10 @@ Can you help us get SOCKS5 support in postfix?
 
 # FAQ
 
+## How can I test my setup
+
+Send a mail to blackhole@onionmx.org. Delivery through onionmx will be blackholed whereas normal delivery bounces.
+
 ## How do I get on this static tor transport map?
 
 If you got things setup, you aren't an open relay, then you ou should [publish a SRV record in DNS](SRV.md) and people can use that. Otherwise scaling is hard. 
