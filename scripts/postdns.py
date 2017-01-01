@@ -23,11 +23,11 @@ except:
 
 # VARIABLES
 config = libs.config_reader(libs.find_conffile(config_path, prefix="postdns"))
-myresolver.nameservers = config["RESOLVER"]["resolver_ip"].split(",")
-myresolver.port = int(config["RESOLVER"]["resolver_port"])
-srv_lookup = config["DNS"]["srv_record"]
-onion_transport = config["REROUTE"]["onion_transport"]
-myself = config["DOMAIN"]["hostname"]
+myresolver.nameservers = config.get("RESOLVER", "resolver_ip").split(",")
+myresolver.port = int(config.get("RESOLVER", "resolver_port"))
+srv_lookup = config.get("DNS", "srv_record")
+onion_transport = config.get("REROUTE", "onion_transport")
+myself = config.get("DOMAIN", "hostname")
 
 # magic
 record = srv_lookup + domain
