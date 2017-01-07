@@ -40,7 +40,7 @@ In main.cf:
 
 Discussion:
 
-If you want to "pin" some onion transports with a [static map](tor_transport), because you've confirmed addresses out-of-band and don't want to leak metadata through DNS requests, you can do that by setting that file before the tcp map, like this:
+If you want to "pin" some onion transports with a [static map](sources/map.yml), because you've confirmed addresses out-of-band and don't want to leak metadata through DNS requests, you can do that by setting the [generated transport](postfix.md) map before the tcp map, like this:
 
     transport_maps = hash:/etc/postfix/tor_transport, tcp:127.0.0.1:23000
 

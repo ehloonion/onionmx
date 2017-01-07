@@ -6,9 +6,9 @@ Onion mail delivery: *so* delicious!
 
 Even if you use TLS for your connections they are opportunistic. Even if you use OpenPGP for your connections, it is relatively easy for someone passively monitoring email traffic to correlate interesting metadata: who is communicating with whom, when and how much. Worse, it is trivial for a third party to know that two people are communicating. 
 
-By joining our little caramelized onion party, we can deliver mail over Tor onion services, and we can prevent this unauthorized privacy violation. 
+By joining our little caramelized onion party, we can deliver mail over Tor onion services, and we can prevent this unauthorized privacy violation.
 
-Lets turn out the lights and cook some onions.
+Let's turn out the lights and cook some onions.
 
 ## Why do it over onion services, and not just use Tor itself?
 
@@ -90,7 +90,7 @@ Send a mail to blackhole@onionmx.org. Delivery through onionmx will be blackhole
 
 If you got things setup, you aren't an open relay, then you ou should [publish a SRV record in DNS](SRV.md) and people can use that. Otherwise scaling is hard. 
 
-However, if you can't do that, and you can prove the onion you have is valid, then make pull request for the [Tor transport map](tor_transport) to add your domain. 
+However, if you can't do that, and you can prove the onion you have is valid, then make pull request for the [onion service map](sources/map.yml) to add your domain and onion service.
 
 The ones in this file we have verified, you can trust us on that, or not.
 
