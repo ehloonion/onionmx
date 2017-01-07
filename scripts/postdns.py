@@ -2,8 +2,12 @@
 
 import re
 import sys
+import os
 import dns.resolver
 from scripts import libs
+
+
+config_path = "{0}/config".format(os.path.dirname(os.path.dirname(__file__)))
 
 myresolver = dns.resolver.Resolver()
 
@@ -18,11 +22,12 @@ except:
     sys.exit(0)
 
 # VARIABLES
-myresolver.nameservers = ['127.0.0.1']
-myresolver.port = 53
-srv_lookup = '_onion-mx._tcp.'
-onion_transport = 'smtptor'
-myself = r'MYDOMAIN.net'
+config = libs.config_reader(libs.find_conffile(config_path, prefix="postdns"))
+myresolver.nameservers = config.get("RESOLVER", "resolver_ip").split(",")
+myresolver.port = int(config.get("RESOLVER", "resolver_port"))
+srv_lookup = config.get("DNS", "srv_record")
+onion_transport = config.get("REROUTE", "onion_transport")
+myself = config.get("DOMAIN", "hostname")
 
 # magic
 record = srv_lookup + domain
