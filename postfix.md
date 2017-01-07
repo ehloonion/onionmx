@@ -73,9 +73,12 @@ In your `/etc/postfix/main.cf`, add a transport map:
 
 *You may already have transport maps, just add this one, separated by commas.*
 
-Then, create the transport map file by taking [the file you can find in this
-repository](tor_transport) and putting it in `/etc/postfix/tor_transport` (or
-the directory where you configured it above).
+Then, create the transport map file by running [the generation script you can find
+in this repository](scripts/map2postfix-transport.rb) and putting it in
+`/etc/postfix/tor_transport` (or the directory where you configured it above).
+
+    # scripts/map2postfix-transport.rb sources/map.yml > /etc/postfix/tor_transport
+    # # or wherever you like to store it
 
 Then hash the map:
 

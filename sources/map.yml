@@ -1,0 +1,70 @@
+# A static mapping of email domains to onion services,
+# where the key of the map are the onion servies itself.
+#
+# Basic structure:
+# 'onion_service1':
+#   - domainA
+# 'onion_service2':
+#   - domain1
+#   - domain2
+#
+# Adding a new mapping:
+#
+# * Either add a domain to your existing
+#   onion service, keeping them alphabetically
+#   sorted.
+# * Or add a new onion service name and its domains to
+#   the list in an alphabetical order.
+#
+# Rerun the scripts to generate the mappings for your MTA.
+---
+'cssj56utefk3wxsv.onion':
+  - 'boum.org'
+'h2qkxasmmqdmyiov.onion':
+  - 'systemli.org'
+'hi2yaj2v3yl4nggt.onion':
+  - 'koumbit.org'
+'j7xlydwquvyhasnk.onion':
+  - 'sindominio.net'
+'lloiryev7cvzszsn.onion':
+  - 'espiv.net'
+'m5545lfnfnw6z2he.onion':
+  - 'so36.net'
+  - 'mail36.net'
+'mssatgg2rwa4aytk.onion':
+  - 'anargeek.net'
+  - 'irq7.fr'
+  - 'pimienta.org'
+  - 'poivron.org'
+  - 'potager.org'
+  - 'sweetpepper.org'
+'wvctipy4ylajd5fc.onion':
+  - 'lelutin.ca'
+'wy6zk3pmcwiyhiao.onion':
+  - 'riseup.net'
+'tyiw2fzn3uckv2my.onion':
+  - 'espora.org'
+'xpgylzydxykgdqyg.onion':
+  - 'lists.riseup.net'
+'ysp4gfuhnmj6b4mb.onion':
+  - 'glei.ch'
+  - 'brief.li'
+  - 'cronopios.org'
+  - 'cryptomail.ch'
+  - 'einfachsicher.ch'
+  - 'immer-da.ch'
+  - 'immerda.ch'
+  - 'linksunten.ch'
+  - 'lists.immerda.ch'
+  - 'muhvie.ch'
+  - 'muh-vie.ch'
+  - 'politischkorrekt.ch'
+  - 'paratodastodo.net'
+  - 'paratodastodo.org'
+  - 'paratodostodo.org'
+  - 'sichermail.ch'
+  - 'sicheremail.ch'
+  - 'supernormal.net'
+  - 'ungehorsam.ch'
+'zq36q5rfxd3cnvd5.onion':
+  - 'lists.espiv.net'
