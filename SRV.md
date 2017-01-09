@@ -16,7 +16,7 @@ You need to install a script which replies to [TCP table lookup queries](http://
 This will detail how to get the python script working, but there is also
 a [go implementation](https://git.autistici.org/ale/postfix-onion-transport), which is probably more performant.
 
-Download the [script](https://raw.githubusercontent.com/ehloonion/onionmx/master/scripts/postdns.py) and put it in /usr/local/bin and make it executable.
+Download the [script](https://raw.githubusercontent.com/ehloonion/onionmx/master/postdns/postdns.py) and put it in /usr/local/bin and make it executable.
 
 Install the needed dependency:
 

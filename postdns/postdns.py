@@ -4,7 +4,7 @@ import re
 import sys
 import os
 import dns.resolver
-from scripts import libs
+import libs
 
 
 config_path = "{0}/config".format(os.path.dirname(os.path.dirname(__file__)))
