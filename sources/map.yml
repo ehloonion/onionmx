@@ -18,6 +18,9 @@
 #
 # Rerun the scripts to generate the mappings for your MTA.
 ---
+'4my2dd2okjr75aho.onion':
+  - 'calyx.com'
+  - 'calyxinstitute.org'
 'cssj56utefk3wxsv.onion':
   - 'boum.org'
 'h2qkxasmmqdmyiov.onion':
@@ -38,6 +41,8 @@
   - 'poivron.org'
   - 'potager.org'
   - 'sweetpepper.org'
+'tyiw2fzn3uckv2my.onion':
+  - 'espora.org'
 'wvctipy4ylajd5fc.onion':
   - 'lelutin.ca'
 'wy6zk3pmcwiyhiao.onion':
