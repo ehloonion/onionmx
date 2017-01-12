@@ -16,7 +16,7 @@ You need to install a script which replies to [TCP table lookup queries](http://
 This will detail how to get the python script working, but there is also
 a [go implementation](https://git.autistici.org/ale/postfix-onion-transport), which is probably more performant.
 
-Download the [script](https://raw.githubusercontent.com/ehloonion/onionmx/master/scripts/postdns.py) and put it in /usr/local/bin and make it executable.
+Download the [script](https://raw.githubusercontent.com/ehloonion/onionmx/master/postdns/postdns.py) and put it in /usr/local/bin and make it executable.
 
 Install the needed dependency:
 
@@ -24,13 +24,19 @@ Install the needed dependency:
 
 # Configure the script
 
-Edit the script and change 'myself' variable with your local domain.
+Create a copy of the postdns.ini file and rename it postdns.local.ini to avoid tampering with the reference config (if no postdns.local.ini exists, the reference config will be used)
 
-The script thinks you have a local resolver at 127.0.0.1:53 answering TCP queries. If not, make the necessary changes. 
+Edit the config file and change
+- under the `DOMAIN` section the `hostname` field with your local domain
+- under the `RESOLVER` section the `resolver_ip` field with your resolver (default is 127.0.0.1)
+    - to use multiple resolvers, seperate them with comma `,`
+- under the `RESOLVER` section the `resolver_port` field with the port your resolver listens (default is 53)
 
 Discussion:
 
 The script queries the destination domain for a specific SRV record, '_onion-mx._tcp.' and if it finds a '.onion' address in the reply it gives it back to postfix to be used by the 'smtptor' service defined in master.cf. If no valid SRV record is found the mail is passed to 'smtp' service. This gives us dynamic SRV lookups that lead to SMTP over onion addresses!
+- To change the SRV record the scripts looks for, edit the config file mentioned above and change under the `DNS` section the `srv_record` field with the SRV record you have setup (default is `_onion-mx._tcp.`)
+- To change the service that will be used when a '.onion' address is found,  edit the config file mentioned above and change under the `REROUTE` section the `onion_transport` field with the service you want to be used (default is `smtptor`)
 
 # Configure postfix
 
