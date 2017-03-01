@@ -66,6 +66,8 @@ Are there problems? [Why yes there are!](problems.md)
 
 There is a [mailing list](https://lists.immerda.ch/mailman/listinfo/onionmx) to discuss the development of this proposal.
 
+or an IRC channel #onionmx on irc.indymedia.org
+
 Maybe you have a better way? Create issues or pull requests!
 
 ## Advocate
