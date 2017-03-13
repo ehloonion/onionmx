@@ -1,49 +1,57 @@
 #!/usr/bin/env python
 
-import re
-import sys
-import os
-import dns.resolver
+from collections import namedtuple
+from os.path import dirname, abspath
 import libs
+import postfixrerouter
+from olookup import OnionServiceLookup
 
 
-config_path = "{0}/config".format(os.path.dirname(os.path.dirname(__file__)))
+class PostDNS(object):
+    root_folder = dirname(dirname(abspath(__file__)))
+    _default_config = "{0}/config".format(root_folder)
+    _mappings_file = "{0}/sources".format(root_folder)
 
-myresolver = dns.resolver.Resolver()
+    def __init__(self, config_path=_default_config, map_path=_mappings_file):
+        self.config = libs.config_reader(libs.find_conffile(config_path,
+                                                            prefix="postdns"))
+        self.mappings_path = map_path
+        self.rerouters = namedtuple('rerouters', ('lazy', 'onion'))
 
-name = libs.cross_input("")
-if name == 'get *':
-    print("200 :")
-    sys.exit(0)
+    @property
+    def myname(self):
+        return self.config.get("DOMAIN", "hostname")
+
+    @staticmethod
+    def get_domain(name):
+        return name.split("@")[1]
+
+    def configure(self):
+        onion_resolver = OnionServiceLookup(self.config)
+        self.rerouters.lazy = postfixrerouter.LazyPostfixRerouter(
+            self.config, self.mappings_path)
+        self.rerouters.onion = postfixrerouter.OnionPostfixRerouter(
+            self.config, onion_resolver)
+
+    def _reroute(self, domain):
+        if self.myname == domain:
+            return tuple(["200 :"])
+        else:
+            return (self.rerouters.lazy.reroute(domain)
+                    or self.rerouters.onion.reroute(domain))
+
+    def run(self, address):
+        domain = self.get_domain(address)
+        routing = self._reroute(domain)
+        print("\n".join(routing) if routing else "200 smtp:")
+
+
 try:
-    domain = name.split("@")[1]
-except:
+    postdns = PostDNS()
+    addr = libs.cross_input("")
+    if addr == 'get *':
+        print("200 :")
+    postdns.configure()
+    postdns.run(addr)
+except (KeyboardInterrupt, Exception):
     print("200 :")
-    sys.exit(0)
-
-# VARIABLES
-config = libs.config_reader(libs.find_conffile(config_path, prefix="postdns"))
-myresolver.nameservers = config.get("RESOLVER", "resolver_ip").split(",")
-myresolver.port = int(config.get("RESOLVER", "resolver_port"))
-srv_lookup = config.get("DNS", "srv_record")
-onion_transport = config.get("REROUTE", "onion_transport")
-myself = config.get("DOMAIN", "hostname")
-
-# magic
-record = srv_lookup + domain
-
-if not re.search(myself, record):
-    try:
-        answers = myresolver.query(record, 'SRV', tcp=True)
-        for rdata in answers:
-            if re.search(r'onion\.$', str(rdata.target)):
-                print("200 {onion_tp}:[{data}]"
-                      .format(onion_tp=onion_transport,
-                              data=str(rdata.target).rstrip('.')))
-            else:
-                print("200 smtp:")
-    except:
-        print("200 smtp:")
-else:
-    print("200 :")
-    sys.exit(0)
