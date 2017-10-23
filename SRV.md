@@ -13,30 +13,9 @@ Test that it is working by doing a DNS query of your domain, it should return th
 
 You need to install a script which replies to [TCP table lookup queries](http://www.postfix.org/tcp_table.5.html). 
 
-This will detail how to get the python script working, but there is also
-a [go implementation](https://git.autistici.org/ale/postfix-onion-transport), which is probably more performant.
-
-Download the [script](https://raw.githubusercontent.com/ehloonion/onionmx/master/postdns/postdns.py) and put it in /usr/local/bin and make it executable.
-
-Install the needed dependency:
-
-    # apt install python-dnspython
-
-# Configure the script
-
-Create a copy of the postdns.ini file and rename it postdns.local.ini to avoid tampering with the reference config (if no postdns.local.ini exists, the reference config will be used)
-
-Edit the config file and change
-- under the `DOMAIN` section the `hostname` field with your local domain
-- under the `RESOLVER` section the `resolver_ip` field with your resolver (default is 127.0.0.1)
-    - to use multiple resolvers, seperate them with comma `,`
-- under the `RESOLVER` section the `resolver_port` field with the port your resolver listens (default is 53)
-
-Discussion:
-
-The script queries the destination domain for a specific SRV record, '_onion-mx._tcp.' and if it finds a '.onion' address in the reply it gives it back to postfix to be used by the 'smtptor' service defined in master.cf. If no valid SRV record is found the mail is passed to 'smtp' service. This gives us dynamic SRV lookups that lead to SMTP over onion addresses!
-- To change the SRV record the scripts looks for, edit the config file mentioned above and change under the `DNS` section the `srv_record` field with the SRV record you have setup (default is `_onion-mx._tcp.`)
-- To change the service that will be used when a '.onion' address is found,  edit the config file mentioned above and change under the `REROUTE` section the `onion_transport` field with the service you want to be used (default is `smtptor`)
+There are two implementations of a tcp transport script, each one with instructions on how to set them up and use them
+- [one in Python](https://github.com/ehloonion/onionrouter)
+- [one in Go](https://git.autistici.org/ale/postfix-onion-transport)
 
 # Configure postfix
 
@@ -54,7 +33,7 @@ This will lookup the entries in the static map and resolve them, but if they are
 
 Now set the following in master.cf:
 
-    127.0.0.1:23000 inet n n n - 0 spawn user=nobody argv=/usr/local/bin/postdns.py
+    127.0.0.1:23000 inet n n n - 0 spawn user=nobody argv=/usr/local/bin/<your-tcp-transport-script>
 
 and restart postfix.
 
