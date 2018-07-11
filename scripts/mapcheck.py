@@ -3,9 +3,7 @@
 # Check if hostname mappings in provided map.yml matches the domain's
 # `_onion-mx._tcp.domain.tld.` SRV records. (see SRV.md for details)
 #
-# Returns errorcode corresponding to number of failed checks. (max 255 because
-# we can only return unsigned byte and we don't want to accidentally wrap
-# around and return success)
+# If all queries fail, your DNS resolver may not work as expected.
 #
 # requirements: dnspython pyyaml
 
@@ -31,10 +29,7 @@ for onion,domains in mapdata.items():
         try:
             response = resolver.query(name, "SRV")
             result = [str(x).rstrip(".").split(" ")[-1] for x in response]
-            print
-            if onion in result:
-                print("OKAY {} -> {}".format(domain, onion))
-            else:
+            if not onion in result:
                 print("FAIL {} -> {}".format(domain, onion))
                 fails += 1
         except Exception as e:
@@ -42,10 +37,6 @@ for onion,domains in mapdata.items():
             fails += 1
 
 # report back to the user
-if total == fails:
-    print("WARN no successful queries. "
-          "Your DNS resolver may not work as expected.", file=sys.stderr)
-else:
-    print("INFO {} of {} queries failed".format(fails, total), file=sys.stderr)
+print("INFO {} of {} queries failed".format(fails, total), file=sys.stderr)
 
-exit(min(fails, 255))
+exit(fails != 0)
