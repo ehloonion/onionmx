@@ -30,13 +30,14 @@ for onion,domains in mapdata.items():
             response = resolver.query(name, "SRV")
             result = [str(x).rstrip(".").split(" ")[-1] for x in response]
             if not onion in result:
-                print("FAIL {} -> {}".format(domain, onion))
+                print("{} could not be resolved to {} (result: {})".format(
+                    domain, onion, ",".join(result)))
                 fails += 1
         except Exception as e:
-            print("FAIL {} -> {} ({})".format(domain, onion, e))
+            print("{} could not be resolved to {} ({})".format(domain, onion, e))
             fails += 1
 
-# report back to the user
-print("INFO {} of {} queries failed".format(fails, total), file=sys.stderr)
-
-exit(fails != 0)
+# report back to the user if anything failed
+if fails != 0:
+    print("INFO {} of {} queries failed".format(fails, total), file=sys.stderr)
+    exit(2)
