@@ -8,6 +8,8 @@ By default, in postfix, you are allowing `127.0.0.1/8` in `mynetworks` and `smtp
 
 There are a few ways of dealing with this. 
 
+### Option 1: Remove 127.0.0.1 from mynetworks and remove mynetworks from smtpd_relay_restrictions
+
 We looked at our setup and determined that any local process that needs to send mail should use sendmail/maildrop and not SMTP via the loopback address. We were originally worried that this wasn't the case, but after disabling this, we have not found any problems.
 
 So we removed 127.0.0.1 from mynetworks, and then used the newer postfix variable that was designed for restricting relays:
@@ -26,6 +28,8 @@ smtpd_recipient_restrictions =
 
 *Do not* just copy and paste the above, you should carefully review your restrictions to make sure they are right for you.
 
+### Option 2: Use a secondary postfix transport with a different set of restrictions
+
 Another way is to send all mail through a secondary transport that has a different set of restrictions:
 
 ~~~
@@ -40,6 +44,14 @@ Another way is to send all mail through a secondary transport that has a differe
         -o smtpd_sender_restrictions=
 ~~~
 
+Next specify that Tor should redirect connections to .onion:25 to 2525, .onion:587 to 2587 like so in tor/torrc:
+
+    HiddenServiceDir /var/lib/tor/mailserver
+    HiddenServicePort 25 2525
+    HiddenServicePort 587 2587
+
+### Option 3: Use different IP endpoint for Tor and exclude this IP from mynetworks
+
 Another way to solve this is by:
 
 1. Adding 127.0.0.25 to inet_interfaces in main.cf.
@@ -49,6 +61,8 @@ Another way to solve this is by:
    auto lo
    iface lo inet loopback
      up ip addr add 127.0.0.25 dev $IFACE || true
+
+### Option 4: Use different port for submission through Tor and prohibit mail transmission to port 25 with extra variable 
 
 Another way is to let postfix listen to a different port than 25 for submission through Tor while not permitting localhost sending through that port: 
 
@@ -64,7 +78,7 @@ Another way is to let postfix listen to a different port than 25 for submission 
 
 Next specify that Tor should redirect connections to .onion:25 to 2525 like so in tor/torrc:
 
-    HiddenServiceDir /var/lib/tor/mailespiv_public
+    HiddenServiceDir /var/lib/tor/mailserver
     HiddenServicePort 25 2525
 
 
