@@ -1,5 +1,7 @@
 # Problems
 
+The main problem that organizations have had doing this, in our experience over the years, is sometimes the onion delivery stops working. This can happen because the tor guard went down, bugs in the code, or other reasons. This can result in mail becoming deferred and not delivered. The usual fix to this is to restart tor, and then things work again. Its a bit difficult to find a way to monitor this situation, without a lot of false positives.
+
 There are much better ways to provide secure email, unfortunately none of them is ready to use yet. In an effort to not let the perfect be the enemy of the good, we will do this for a while, improve it and eventually we will switch to something better.
 
 Do not be fooled, this is not a panacea. We do get a defense against traffic timing attackers who are watching one SMTP server, but not the other. It also doesn't hide your server.
@@ -34,3 +36,4 @@ I'm not sure you get anything additional with clearnet+TLS. You *do* get cert va
 For e2e we are talking about pinning .onion vs. pinning TLS fingerprints, but not hiding metadata/anonymity. You also have to do a DNS SRV record lookup in the clearnet, so you will leak something (although its pretty small and that result is cached. 
 
 Pinning certificate key fingerprints on top of this would improve things. 
+
