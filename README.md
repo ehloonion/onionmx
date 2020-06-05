@@ -24,7 +24,7 @@ However, there *is* a way to deliver to onion addresses also, we need to add thi
 
 ## Does it work?
 
-Yes. We've been doing this for over a year, and it works dandy. We would like to do this with more of the internet.
+Yes! There are many organizations that are delivering mail over onions for over 5 years now. It works dandy. We would like to do this with more of the internet.
 
 ## What does it look like?
 
