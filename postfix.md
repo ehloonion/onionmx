@@ -47,7 +47,7 @@ In `smtp_tor`:
 
     #!/bin/sh
 
-    /usr/bin/torsocks -i /usr/lib/postfix/smtp $@
+    /usr/bin/torsocks -i /usr/lib/postfix/smtp "$@"
 
 Make it executable.
 
