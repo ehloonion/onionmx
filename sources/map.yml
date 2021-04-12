@@ -18,6 +18,8 @@
 #
 # Rerun the scripts to generate the mappings for your MTA.
 ---
+'blackhost5xlrhev.onion':
+  - 'blackhost.xyz'
 '4my2dd2okjr75aho.onion':
   - 'calyx.com'
   - 'calyxinstitute.org'
