@@ -9,6 +9,9 @@ In your torrc (/etc/tor/torrc), add something like the following:
     # hidden service: hidden_mx
     HiddenServiceDir /var/lib/tor/hidden_mx
     HiddenServicePort 25
+To take advantage of better crypto and other improved security features, add the following line (requires Tor version >0.3.2.1):
+
+    HiddenServiceVersion 3
 
 Now restart tor, and look in /var/lib/tor/hidden_mx/hostname, you will see your new onion domain name.
 
