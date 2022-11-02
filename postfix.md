@@ -49,6 +49,9 @@ In `smtp_tor`:
 
     /usr/bin/torsocks -i /usr/lib/postfix/smtp "$@"
 
+Note that in debian, the path to the `smtp` binary might need to be changed
+to `/usr/lib/postfix/sbin/smtp` in the script above.
+
 Make it executable.
 
     chmod +x $(postconf -h daemon_directory)/smtp_tor
